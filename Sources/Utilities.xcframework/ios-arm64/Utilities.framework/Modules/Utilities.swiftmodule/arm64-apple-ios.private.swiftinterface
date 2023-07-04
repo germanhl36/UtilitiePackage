@@ -1,0 +1,180 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios16.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Utilities
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Accelerate
+import CoreGraphics
+import Foundation
+import PDFKit
+import StoreKit
+import Swift
+import UIKit
+@_exported import Utilities
+import _Concurrency
+import _StringProcessing
+public enum FileError : Swift.Error {
+  case FileExists
+  case FileCantBeErased
+  public static func == (a: Utilities.FileError, b: Utilities.FileError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension Utilities.FileError : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class FileHandler {
+  public class func copyFile(sourceURL: Foundation.URL, destiny: Foundation.URL, completion: ((Swift.Result<Foundation.URL, any Swift.Error>) -> ())?)
+  public class func downloadCertificate(url: Foundation.URL, localName: Swift.String, completion: (() -> ())?)
+  public class func getDocumentsDirectory() -> Foundation.URL
+  public class func getPDFFilesInDocumentsFolder() -> [Foundation.URL]?
+  public class func checkIfIsPasswordProtected(url: Foundation.URL) -> Swift.Bool
+  public class func deleteFile(url: Foundation.URL, completion: ((Swift.Result<Swift.Bool, any Swift.Error>) -> ())?)
+  public static func deleteFile(fileURL: Foundation.URL) -> Swift.Bool
+  public static func fileExists(fileURL: Foundation.URL) -> Swift.Bool
+  @objc deinit
+}
+extension UIKit.UIAlertAction {
+  @_Concurrency.MainActor(unsafe) public var titleTextColor: UIKit.UIColor? {
+    get
+    set
+  }
+}
+public struct PDFPageSequence : Swift.Sequence, Swift.IteratorProtocol {
+  public mutating func next() -> CoreGraphics.CGPDFPage?
+  public typealias Element = CoreGraphics.CGPDFPage
+  public typealias Iterator = Utilities.PDFPageSequence
+}
+extension Foundation.URL {
+  public func getFileName() -> Swift.String
+  public func getFileExtension() -> Swift.String
+}
+public struct Constants {
+}
+extension Foundation.UserDefaults {
+  public enum Key : Swift.String {
+    case reviewWorthyActionCount
+    case lastReviewRequestAppVersion
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public func integer(forKey key: Foundation.UserDefaults.Key) -> Swift.Int
+  public func string(forKey key: Foundation.UserDefaults.Key) -> Swift.String?
+  public func set(_ integer: Swift.Int, forKey key: Foundation.UserDefaults.Key)
+  public func set(_ object: Any?, forKey key: Foundation.UserDefaults.Key)
+}
+final public class Box<T> {
+  public typealias Listener = (T) -> Swift.Void
+  final public var listener: Utilities.Box<T>.Listener?
+  final public var value: T {
+    get
+    set
+  }
+  public init(_ value: T)
+  final public func bind(listener: Utilities.Box<T>.Listener?)
+  @objc deinit
+}
+public enum CoreDataErrors : Swift.Error {
+  case unableToGetAppDelegate
+  case unableToLoadCoreData
+  public static func == (a: Utilities.CoreDataErrors, b: Utilities.CoreDataErrors) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension Swift.String {
+  public func size(font: UIKit.UIFont, width: CoreFoundation.CGFloat) -> CoreFoundation.CGSize
+}
+@_hasMissingDesignatedInitializers public class PDFUtilities {
+  public static let pageMargins: UIKit.UIEdgeInsets
+  public static func pdfDocumentToGrayScale(document: PDFKit.PDFDocument, numberOfPagesForBigFiles: Swift.Int, maxFilePages: Swift.Int) -> Foundation.URL?
+  public static func savePagesToFile(fileURL: Foundation.URL, pages: [PDFKit.PDFPage])
+  public static func getImageFromPage(page: PDFKit.PDFPage) -> CoreGraphics.CGImage?
+  public static func getGrayScaleImage(originalImage: CoreGraphics.CGImage, pageSize: CoreFoundation.CGRect) -> UIKit.UIImage?
+  public static func resizeImage(image: UIKit.UIImage, width: CoreFoundation.CGFloat, height: CoreFoundation.CGFloat) -> UIKit.UIImage?
+  public static func calculteImageSize(originalSize: CoreFoundation.CGSize, pageSize: CoreFoundation.CGSize) -> CoreFoundation.CGSize
+  public static func PDFDataFromString(content: Swift.String, pageSize: CoreFoundation.CGSize) -> Foundation.URL?
+  public static func PDFDataFromImage(image: UIKit.UIImage, pageSize: CoreFoundation.CGSize) -> Foundation.URL?
+  public static func PDFDataFromMultipleImages(images: [UIKit.UIImage], pageSize: CoreFoundation.CGSize, fileName: Swift.String = "file.pdf") -> Foundation.URL?
+  public static func PDFDataFromWebView(viewPrintFormatter: UIKit.UIViewPrintFormatter, pageSize: CoreFoundation.CGSize, addMargins: Swift.Bool = true) -> Foundation.URL?
+  public static func savePDFDataToFile(fileName: Swift.String, fileData: Foundation.Data?) -> Foundation.URL?
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class BaseViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) public func configureNavigationBar()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension Utilities.BaseViewController {
+  @_Concurrency.MainActor(unsafe) public func showLoadingIndicator()
+  @_Concurrency.MainActor(unsafe) public func hideLoadingIndicator()
+  @_Concurrency.MainActor(unsafe) public func presentOkAlert(title: Swift.String, message: Swift.String, style: UIKit.UIAlertController.Style = .alert, executeAfter: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor(unsafe) public func presentOkCancelAlert(title: Swift.String, message: Swift.String, style: UIKit.UIAlertController.Style = .alert, okButtonContent: Swift.String = "Ok", cancelButtonContent: Swift.String = "Cancel", executeAfterOK: (() -> Swift.Void)? = nil, executeAfterCancel: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor(unsafe) public func presentErrorAlert(message: Swift.String, style: UIKit.UIAlertController.Style = .alert, executeAfter: (() -> Swift.Void)? = nil)
+}
+extension UIKit.UIColor {
+  public static func rgbColor(red: Swift.Int, green: Swift.Int, blue: Swift.Int) -> UIKit.UIColor
+  convenience public init?(hexaRGB: Swift.String, alpha: CoreFoundation.CGFloat = 1)
+}
+public enum AppStoreReviewManager {
+  public static let minimumReviewWorthyActionCount: Swift.Int
+  public static func requestReviewIfAppropriate()
+}
+extension UIKit.UIAlertController {
+  @objc @_Concurrency.MainActor(unsafe) dynamic public func textDidChangeInNewCertificateAlert()
+  @_Concurrency.MainActor(unsafe) public static func showMeessageDialog(messageDialog: Swift.String, onOkTapped: (() -> ())?) -> UIKit.UIAlertController
+  @_Concurrency.MainActor(unsafe) public static func renameDialog(currentName: Swift.String, update: @escaping (Swift.String, Swift.String) -> ()) -> UIKit.UIAlertController
+  @_Concurrency.MainActor(unsafe) public static func newFileFound(url: Foundation.URL, safe: @escaping (Swift.String, Foundation.URL, Swift.String) -> ()) -> UIKit.UIAlertController
+}
+public enum MGImageResizingMethod {
+  case MGImageResizeCrop
+  case MGImageResizeCropStart
+  case MGImageResizeCropEnd
+  case MGImageResizeScale
+  public static func == (a: Utilities.MGImageResizingMethod, b: Utilities.MGImageResizingMethod) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension UIKit.UIImage {
+  public var uncompressedPNGData: Foundation.Data? {
+    get
+  }
+  public var highestQualityJPEGNSData: Foundation.Data? {
+    get
+  }
+  public var highQualityJPEGNSData: Foundation.Data? {
+    get
+  }
+  public var mediumQualityJPEGNSData: Foundation.Data? {
+    get
+  }
+  public var lowQualityJPEGNSData: Foundation.Data? {
+    get
+  }
+  public var lowestQualityJPEGNSData: Foundation.Data? {
+    get
+  }
+  public func resizeVI(size: CoreFoundation.CGSize) -> UIKit.UIImage?
+  public func saveImage(_ fileName: Swift.String) -> Foundation.URL?
+  public func imageToFitSize(size fitSize: CoreFoundation.CGSize, resizeMethod: Utilities.MGImageResizingMethod) -> UIKit.UIImage?
+}
+extension Utilities.FileError : Swift.Equatable {}
+extension Utilities.FileError : Swift.Hashable {}
+extension Foundation.UserDefaults.Key : Swift.Equatable {}
+extension Foundation.UserDefaults.Key : Swift.Hashable {}
+extension Foundation.UserDefaults.Key : Swift.RawRepresentable {}
+extension Utilities.CoreDataErrors : Swift.Equatable {}
+extension Utilities.CoreDataErrors : Swift.Hashable {}
+extension Utilities.MGImageResizingMethod : Swift.Equatable {}
+extension Utilities.MGImageResizingMethod : Swift.Hashable {}
